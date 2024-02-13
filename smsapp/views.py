@@ -25,23 +25,22 @@ def insertData(request):
     return render(request,"index.html")
 
 
+import json
+
 def updateData(request,id):
-    if request.method=="POST":
-        name=request.POST['name']
-        email=request.POST['email']
-        age=request.POST['age']
-        gender=request.POST['gender']
+    if request.method=="PUT":
+        body = json.loads(request.body.decode('utf-8'))
 
         edit=Student.objects.get(id=id)
-        edit.name=name
-        edit.email=email
-        edit.gender=gender
-        edit.age=age
+        edit.name=body.get('name')
+        edit.email=body.get('email')
+        edit.gender=body.get('gender')
+        edit.age=body.get('age')
         edit.save()
         messages.warning(request,"Data Updated Successfully")
         return redirect("/")
 
-    d=Student.objects.get(id=id) 
+    d=Student.objects.get(id=id)
     context={"d":d}
     return render(request,"edit.html",context)
 
