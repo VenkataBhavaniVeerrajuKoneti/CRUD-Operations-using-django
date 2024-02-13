@@ -83,8 +83,7 @@
                 <h2 class="text-center form-heading">Insert Student Details</h2>
                 <br />
                 <div class="form-container">
-                    <form action="/insert" method="post">
-                        {% csrf_token %}
+                    <form action="/insert" method="post">{% csrf_token %}
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Enter the Student Name" name="name" required />
                         </div>
